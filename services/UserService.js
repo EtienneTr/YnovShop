@@ -6,11 +6,17 @@ class UserService {
     constructor() {
         //can't use interface provider, use repository instead
         this.userRepository = new UserRepository();
-        this.passManager = new passwordManager()
+        this.passProvider = new passwordManager()
+    }
+
+    async postUSer(body){
+        let user = await this.createUser(body);
+
+        return this.saveUser(user);
     }
 
     async createUser(body) {
-        const hashPass = await this.passManager.createPassword(body.password);
+        const hashPass = await this.passProvider.createPassword(body.password);
 
         const newUser = {
             name: body.name || "",
@@ -21,6 +27,10 @@ class UserService {
             enable: 0
         };
 
+        return newUser;
+    }
+
+    saveUser(newUser){
         return this.userRepository.insert(newUser);
     }
 

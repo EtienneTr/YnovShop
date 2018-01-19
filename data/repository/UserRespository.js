@@ -10,10 +10,12 @@ class UserRespository {
         return User.find({});
     }
 
-    getByName(userName){
+    getByUsername(userName){
         return User.findOne({
-            'name': userName
-        });
+            'username': userName
+        }).then(user => {
+            return user;
+        })
     }
 
     getByEmail(email){
@@ -26,9 +28,9 @@ class UserRespository {
 
         let newUser = new User({
             name: user.name,
-            surname: user.surname,
+            username: user.username,
             email: user.email,
-            passwordHash: user.passwordHash,
+            password: user.passwordHash,
             registerDate: user.registerDate,
             enable: user.enable
         });

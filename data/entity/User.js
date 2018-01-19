@@ -1,12 +1,12 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
+
 let User = new Schema({
     name: String,
-    surname: String,
+    username: String,
     email: String,
-    passwordHash: String,
-    salt: String,
+    password: String,
     registerDate: Date,
     enable: Boolean
 });

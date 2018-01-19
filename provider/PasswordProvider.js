@@ -6,8 +6,8 @@ class PasswordProvider {
         this.bcrypt = bcrypt;
     }
 
-    hashPassword(password) {
-        return this.bcrypt.hash(password, 10);
+    hashPassword(password, salt = 10) {
+        return this.bcrypt.hash(password, salt);
     }
 
     async createPassword(password){
@@ -19,6 +19,10 @@ class PasswordProvider {
         catch(exception) {
             throw exception;
         }
+    }
+
+    comparePassword(password, hashPassword){
+        return bcrypt.compare(password, hashPassword);
     }
 }
 
