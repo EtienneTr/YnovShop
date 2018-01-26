@@ -11,7 +11,7 @@ class LoginProvider {
 
         let user = await this.userService.find(username);
         if(!user){
-            return new Error("invalid user");
+            throw new Error("invalid user");
         } else {
             let res = await this.passwordProvider.comparePassword(password, user.password);
             if(res){

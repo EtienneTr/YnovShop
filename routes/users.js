@@ -33,7 +33,6 @@ router.post('/login', (req, res, next) => {
         })
         .catch(err => {
             res.status(401).json({status: 401, message: "Username or password invalid : " + err});
-            //res.status(401).json({status: 401, message: err.message, stack: err.stack.toString()});
         });
 });
 

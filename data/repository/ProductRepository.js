@@ -6,7 +6,7 @@ class ProductRepository {
         this.Product = Product;
     }
 
-    getAll(){
+    findAll(){
         return this.Product.find({});
     }
 
@@ -16,6 +16,10 @@ class ProductRepository {
         }).then(product => {
             return product;
         })
+    }
+
+    getById(_id) {
+        return this.Product.findById(_id);
     }
 
     insert(product){

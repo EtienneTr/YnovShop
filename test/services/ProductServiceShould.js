@@ -185,3 +185,28 @@ describe('ProductService create product', () => {
 
    });
 });
+
+describe('ProductService getOne', () => {
+
+    let productService;
+    beforeEach(() => {
+        productService = new ProductService();
+    });
+
+    it('Should throw error if no id', () => {
+
+        return test.promise
+            .given(false)
+            .when(id => {
+                return productService.getOne(null);
+            })
+            .then(result => {
+                test.fail('need throw error');
+            })
+            .catch(err => {
+                should(err).be.an.instanceof(Error);
+                should(err.message).be.equal('Product ID needed.');
+            });
+
+    });
+});

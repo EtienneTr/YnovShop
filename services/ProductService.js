@@ -14,7 +14,7 @@ class ProductService {
 
             let newProduct = {
                 name: product.name,
-                onSaleDate: new Date(product.onSaleDate) || new Date(),
+                onSaleDate: product.onSaleDate ? new Date(product.onSaleDate) : new Date(),
                 description: product.description || '',
                 price: product.price,
                 discount: product.discount || 0,
@@ -62,6 +62,16 @@ class ProductService {
         }
     }
 
+    getAll(){
+        return this.ProductRepository.findAll();
+    }
+
+    getOne(_id){
+        if(!_id){
+            throw new Error('Product ID needed.');
+        }
+        return this.ProductRepository.getById(_id);
+    }
 }
 
 module.exports = ProductService;

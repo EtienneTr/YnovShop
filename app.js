@@ -6,8 +6,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 let mongoose = require('mongoose');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+let index = require('./routes/index');
+let users = require('./routes/users');
+let products = require('./routes/products');
+
 var view = require('./routes/public');
 
 var app = express();
@@ -36,9 +38,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/static', express.static(path.join(__dirname, 'public')));
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-access-token");
+    next();
+});
+
 //Routes
 app.use('/', index);
 app.use('/api/users', users);
+app.use('/api/products', products);
 
 app.use('/view', view);
 

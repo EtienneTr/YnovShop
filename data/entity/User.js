@@ -14,7 +14,8 @@ let User = new Schema({
     },
     password: String,
     registerDate: Date,
-    enable: Boolean
+    enable: Boolean,
+    addresses: [{type: Schema.Types.ObjectId, ref: 'Address', default: []}],
 });
 
 let userModel = mongoose.model('User', User);
