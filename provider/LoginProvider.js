@@ -9,19 +9,18 @@ class LoginProvider {
 
     async authenticate(username, password) {
 
-        let user = await this.userService.userRepository.getByUsername(username);
+        let user = await this.userService.find(username);
         if(!user){
             return new Error("invalid user");
         } else {
             let res = await this.passwordProvider.comparePassword(password, user.password);
             if(res){
                 return user;
+            } else {
+                return Promise.reject("Wrong password");
             }
         }
     }
-
-
-
 }
 
 module.exports = LoginProvider;

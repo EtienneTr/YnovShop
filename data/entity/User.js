@@ -3,9 +3,15 @@ let Schema = mongoose.Schema;
 
 
 let User = new Schema({
-    name: String,
+    name: {
+        type: String,
+        required: true
+    },
     username: String,
-    email: String,
+    email: {
+        type: String,
+        required: true
+    },
     password: String,
     registerDate: Date,
     enable: Boolean

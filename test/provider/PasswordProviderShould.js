@@ -1,4 +1,4 @@
-let PasswordProvider = require('../provider/PasswordProvider');
+let PasswordProvider = require('../../provider/PasswordProvider');
 let test = require("unit.js");
 let should = test.should;
 

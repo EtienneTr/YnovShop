@@ -26,14 +26,7 @@ class UserRespository {
 
     insert(user){
 
-        let newUser = new User({
-            name: user.name,
-            username: user.username,
-            email: user.email,
-            password: user.passwordHash,
-            registerDate: user.registerDate,
-            enable: user.enable
-        });
+        let newUser = new User(user);
 
         return newUser.save();
     }

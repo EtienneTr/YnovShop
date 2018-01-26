@@ -1,4 +1,4 @@
-let UserService = require('../services/UserService');
+let UserService = require('../../services/UserService');
 let test = require("unit.js");
 let should = test.should;
 
@@ -28,6 +28,5 @@ describe("UserService methods should", () => {
             .then((newUser) => {
                 newUser.should.have.property('name', 'test');
             });
-
     });
 });

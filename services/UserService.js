@@ -18,11 +18,12 @@ class UserService {
     async createUser(body) {
         const hashPass = await this.passProvider.createPassword(body.password);
 
+        //vérifs
         const newUser = {
             name: body.name || "",
-            surname: body.surname || "",
+            username: body.username || "",
             email: body.email || "",
-            passwordHash: hashPass,
+            password: hashPass,
             registerDate: new Date(),
             enable: 0
         };
@@ -36,6 +37,10 @@ class UserService {
 
     findAll() {
         return this.userRepository.get();
+    }
+
+    find(username) {
+        return this.userRepository.getByUsername(username);
     }
 
     deleteByMail(email) {
