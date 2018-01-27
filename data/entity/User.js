@@ -1,13 +1,17 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
-
+let Address = require('./Address').schema;
 
 let User = new Schema({
     name: {
         type: String,
         required: true
     },
-    username: String,
+    username: {
+        type: String,
+        unique: true,
+        required: true
+    },
     email: {
         type: String,
         required: true
@@ -15,7 +19,7 @@ let User = new Schema({
     password: String,
     registerDate: Date,
     enable: Boolean,
-    addresses: [{type: Schema.Types.ObjectId, ref: 'Address', default: []}],
+    addresses: [Address],
 });
 
 let userModel = mongoose.model('User', User);

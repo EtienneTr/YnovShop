@@ -1,9 +1,9 @@
 let express = require('express');
 let router = express.Router();
-let passport = require('passport');
 
 let userService = require('../services/UserService');
 let LoginProvider = require('../provider/LoginProvider');
+let addressService = require('../services/AddressService');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -47,6 +47,20 @@ router.get('/all', (req, res)=>{
                 res.status(500).json({status: 500, message: err.message});
             }
         );
+});
+
+//Add address for a user
+router.post('/address/add', (req, res) =>{
+    let address = req.body.address;
+    let username = req.body.username;
+    new addressService()
+        .addAddressForUser(username, address)
+        .then(result => {
+            res.status(200).json({status: 200, message: "Address added for user", username});
+        })
+        .catch(err => {
+            res.status(401).json({status: 401, message: "Username or address invalid : " + err});
+        });
 });
 
 module.exports = router;
